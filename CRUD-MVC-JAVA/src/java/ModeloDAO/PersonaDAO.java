@@ -18,9 +18,10 @@ public class PersonaDAO implements CRUD <Persona> {
     ResultSet rs;
     Persona p=new Persona();
     GeneroDAO generoDAO= new GeneroDAO();
-    public PersonaDAO(){
-    generoDAO.agregarDatos();
-    
+    public PersonaDAO(){       
+              if (GeneroDAO.listaGenero.isEmpty()) {
+                generoDAO.agregarDatos();
+            }
     };
     
     @Override
@@ -40,6 +41,7 @@ public class PersonaDAO implements CRUD <Persona> {
                  int idGenero = rs.getInt("idGenero");
                  Genero genero = GeneroDAO.listaGenero.stream().filter (g -> g.getidGenero()== idGenero).findFirst().orElse(null);
                  per.setGenero(genero.getNombre());
+                 per.setIdGenero(idGenero);
                 list.add(per);
             }
         } catch (Exception e) {
@@ -62,7 +64,7 @@ public class PersonaDAO implements CRUD <Persona> {
                 p.setid(rs.getInt("id"));
                 p.setDpi(rs.getString("DPI"));
                 p.setNom(rs.getString("Nombres"));
-                
+                p.setIdGenero(rs.getInt("idGenero"));
             }
         } catch (Exception e) {
         }
@@ -116,7 +118,8 @@ public class PersonaDAO implements CRUD <Persona> {
         return false;
     }
     
-    public Persona password(String username, String password) {
+    public boolean password(String username, String password) {
+        boolean response = false;
          StringBuilder query = new StringBuilder("select * from persona ");
          query.append(String.format("where nombres = '%s' and clave = SHA2('%s',256)", username, password));
         try {
@@ -127,13 +130,12 @@ public class PersonaDAO implements CRUD <Persona> {
                 p.setid(rs.getInt("id"));
                 p.setDpi(rs.getString("DPI"));
                 p.setNom(rs.getString("Nombres"));
-                
+                response = true;
             }
         } catch (Exception e) {
-            
-            return null;
+            response = false;
         }
-        return p;
+        return response;
     }
     
 }

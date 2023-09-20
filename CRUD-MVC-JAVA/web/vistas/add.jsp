@@ -35,11 +35,8 @@
                     List<Genero>list=GeneroDAO.listaGenero;
                     Iterator<Genero>iter=list.iterator();
                     Genero genero=null;
-                    int leido = 0;
-                    while(leido <3 && iter.hasNext()){
-                        genero=iter.next();
-                        leido++;
-                    
+                    while( iter.hasNext()){
+                        genero=iter.next();                    
                 %>                    
                         %>
                         <option value="<%= genero.getidGenero()%>" ><%= genero.getNombre()%></option>

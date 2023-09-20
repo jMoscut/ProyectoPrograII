@@ -2,7 +2,6 @@
 package Controlador;
 
 import Modelo.Persona;
-import ModeloDAO.GeneroDAO;
 import ModeloDAO.PersonaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -55,10 +54,10 @@ public class Controlador extends HttpServlet {
        
         if(action.equalsIgnoreCase("listar")){
             //validamos si no hay generos aun y si la lista es vacia la llenamos con los generos
-            if (GeneroDAO.listaGenero.isEmpty()) {
-                GeneroDAO gen = new GeneroDAO();
-                gen.agregarDatos();
-            }
+//            if (GeneroDAO.listaGenero.isEmpty()) {
+//                GeneroDAO gen = new GeneroDAO();
+//                gen.agregarDatos();
+//            }
            acceso = session.getAttribute("login")  != null ?  listar : login;            
         }else if(action.equalsIgnoreCase("add")){
             acceso = session.getAttribute("login")  != null ?  add : login;
@@ -103,16 +102,15 @@ public class Controlador extends HttpServlet {
             
              String pass=request.getParameter("txtPass");
             String user=request.getParameter("txtUsername");
-            if(dao.password(user, pass) != null){
-
-       // Guardar una variable en la sesión
-        session.setAttribute("login", user);
-                acceso = listar;
-            }
+            if(dao.password(user, pass)){
+                    // Guardar una variable en la sesión
+                     session.setAttribute("login", user);
+                     acceso = listar;
+             }
             else {
-                acceso = login;
+            acceso = login;
             }
-        }
+      }
      
         RequestDispatcher vista=request.getRequestDispatcher(acceso);
         vista.forward(request, response);

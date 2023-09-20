@@ -23,10 +23,11 @@
           %>
              <h1>Modificar Persona</h1>
             <form action="Controlador">
-                DNI:<br>
+                  <label>DNI:</label><br>
                 <input class="form-control" type="text" name="txtDpi" value="<%= p.getDpi()%>"><br>
-                Nombres: <br>
+                 <label>Nombres: </label> <br>
                 <input class="form-control" type="text" name="txtNom" value="<%= p.getNom()%>"><br>
+                <label>Genero: </label>
                  <select class="form-control mb-3" name="txtGen" >
                 <%
                            
@@ -34,14 +35,11 @@
                     List<Genero>list=GeneroDAO.listaGenero;
                     Iterator<Genero>iter=list.iterator();
                     Genero genero=null;
-                    int leido = 0;
-                    while(leido <3 && iter.hasNext()){
-                        genero=iter.next();
-                        leido++;
-                    
+                    while(iter.hasNext()){
+                        genero=iter.next();                    
                 %>                    
                         %>
-                        <option value="<%= genero.getNombre()%>" ><%= genero.getNombre()%></option>
+                        <option value="<%= genero.getNombre()%>" <%= genero.getidGenero() == p.getIdGenero() ? "selected" : "not"%>  ><%= genero.getNombre()%></option>
                         <%}%>
                     </select>
                 <input type="hidden" name="txtid" value="<%= p.getid()%>">

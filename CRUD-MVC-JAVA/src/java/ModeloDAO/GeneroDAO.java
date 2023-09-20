@@ -24,12 +24,7 @@ public class GeneroDAO implements CRUD<Genero> {
     PreparedStatement ps;
     ResultSet rs;
     //LISTA
-    public static final List <Genero> listaGenero = new ArrayList<>();
-    Genero genero = new Genero();
-    
-    
- 
-    
+    public static final List <Genero> listaGenero = new ArrayList<>();   
 
     @Override
     public List listar() {
@@ -53,10 +48,8 @@ public class GeneroDAO implements CRUD<Genero> {
             
             
         }
-
-//SIMULAR LA CACHE 
-        return list;
-        
+        //SIMULAR LA CACHE 
+        return list;        
     }
 
     

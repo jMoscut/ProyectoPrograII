@@ -6,6 +6,7 @@ public class Persona {
     String nom;
     boolean estado;
     String genero;
+    private int idGenero;
     String pass;
     
 
@@ -65,6 +66,20 @@ public class Persona {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    /**
+     * @return the idGenero
+     */
+    public int getIdGenero() {
+        return idGenero;
+    }
+
+    /**
+     * @param idGenero the idGenero to set
+     */
+    public void setIdGenero(int idGenero) {
+        this.idGenero = idGenero;
     }
     
 }
